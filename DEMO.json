@@ -1,0 +1,43 @@
+{
+  "video_script": [
+    {"goto": "/", "wait_ms": 2500, "caption": "Leviathan Lens — paste any rejection letter"},
+    {"click": "button:has-text('Paste a letter')", "wait_ms": 1500, "caption": "Scroll to the intake"},
+    {"click": "button:has-text('Health Insurance Denial (US)')", "wait_ms": 1200, "caption": "Load a real denial sample"},
+    {"fill": "input[placeholder*='Your name']", "value": "Aryan Choudhary", "wait_ms": 500},
+    {"click": "button:has-text('Run Sludge X-Ray')", "wait_ms": 3500, "caption": "Scanning for sludge tactics"},
+    {"scroll": 700, "wait_ms": 1500, "caption": "Sludge score and plain English"},
+    {"hover": "mark:first-of-type", "wait_ms": 1500, "caption": "Hover to see the tactic tooltip"},
+    {"scroll": 700, "wait_ms": 1500, "caption": "Rights & escalation map"},
+    {"click": "button:has-text('Draft response')", "wait_ms": 2500, "caption": "One-click tailored reply"},
+    {"goto": "/dashboard", "wait_ms": 2500, "caption": "Collective Sludge Index"},
+    {"hover": ".grid > div:first-child", "wait_ms": 1500, "caption": "Per-institution tactic frequencies"},
+    {"goto": "/settings", "wait_ms": 2000, "caption": "Bring your own API key — keys stay local"}
+  ],
+  "screenshot_shots": [
+    {"path": "/", "description": "Hero landing with animated X-Ray preview", "wait_ms": 2500},
+    {"path": "/dashboard", "description": "Collective Sludge Index dashboard with seeded data", "wait_ms": 2000},
+    {"path": "/settings", "description": "API keys settings panel (Claude + Gemini)", "wait_ms": 1500},
+    {"path": "/taxonomy", "description": "Full ten-tactic sludge taxonomy reference", "wait_ms": 1500}
+  ],
+  "submission": {
+    "inspiration": "We kept meeting the same moment in different rooms: the friend whose insurer said 'not medically necessary' with no clause attached, the cousin whose UK visa was refused with a fourteen-day window buried in paragraph four, the classmate whose university grievance came back with 'it is our policy.' Same shape every time — a piece of paper designed so that giving up is cheaper than fighting. We wanted to point AI at exactly that wound.",
+    "what_it_does": "Leviathan Lens is a sludge-audit lens for any rejection letter. Paste the letter and in under a minute you get four things: a plain-English translation, a Sludge X-Ray that highlights and names every friction tactic the letter uses against you, a jurisdiction-aware rights and escalation map, and a one-click response draft that cites the right body and neutralises each tactic the X-Ray found.",
+    "how_we_built_it": "Next.js 14 (App Router, standalone Docker output), Tailwind, shadcn-style primitives, Framer Motion for the X-Ray reveal. The analysis engine is a deterministic ten-tactic taxonomy in TypeScript (Sunstein + OECD 2024) that runs on-device so the product works without any API key; when a user pastes a Claude Sonnet 4.5 or Gemini 2.5 Flash key in Settings, the same letter is also sent to the model with a strict JSON schema and spans are verified to be verbatim substrings of the original before being merged in. Keys are localStorage-only and forwarded as request headers — the server never logs or persists them.",
+    "challenges": "Hardest problem was reconciling LLM-returned spans with the real letter: models happily paraphrase. We solved it with a verbatim-substring verifier that drops any span whose quote isn't an exact match, then merges whichever span set is richer (LLM or local). The other was keeping the 60-second wow moment useful — the animated X-Ray had to stagger highlights readably instead of all flashing at once.",
+    "accomplishments": "A product that is demo-complete without any API key, a ten-pattern taxonomy that actually catches real letters, a Collective Sludge Index that turns individual pain into a visible pattern per institution, and a UI that feels like a serious document rather than a chatbot.",
+    "what_we_learned": "Sludge is concrete. Once you name the ten patterns, you see them everywhere — including in our own product copy. We learned to ship fallbacks first (local engine, sample letters, graceful degradation) and only then bolt the LLM on, so the demo never collapses when rate limits hit.",
+    "whats_next": "1) Tesseract.js OCR for phone photos of paper letters. 2) Domain packs for tenancy and government benefits with statute-level citations. 3) Supabase-backed Collective Sludge Index with real-time updates. 4) 'Cc the regulator' one-click send via the Ombudsperson's public intake forms. 5) Multi-language letter support (Gemini handles this well).",
+    "built_with": [
+      "next.js-14",
+      "typescript",
+      "tailwindcss",
+      "framer-motion",
+      "lucide-react",
+      "anthropic-claude-sonnet-4.5",
+      "google-gemini-2.5-flash",
+      "docker",
+      "shadcn-style-ui"
+    ],
+    "category_hint": "Representation of a human system + novel AI use (sludge audit lens)"
+  }
+}
